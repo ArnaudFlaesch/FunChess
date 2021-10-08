@@ -16,7 +16,7 @@
     "ws": "3.3.3"
   },
   "devDependencies": {
-    "elm-live": "2.7.5",
+    "elm-live": "4.0.2",
     "mocha": "3.5.3"
   }
 }
