@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "elm-live": "2.7.5",
-    "mocha": "3.5.3"
+    "mocha": "9.2.2"
   }
 }
