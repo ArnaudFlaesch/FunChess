@@ -2,21 +2,27 @@
   "name": "FunChess",
   "author": "Arnaud Flaesch",
   "version": "1.0.0",
-  "description": "Jeu d'échecs fonctionnel.",
+  "description": "Jeu d'échecs en programmation fonctionnelle.",
   "homepage": "http://arnaudflaesch.github.io/",
   "private": true,
+  "engines": {
+    "node": "10.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "start": "elm-make Main.elm Server.elm Grid.elm Model.elm --yes && opn index.html && opn index.html && node server.js",
-    "test": "mocha --recursive test"
+    "test": "mocha --recursive test",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
-    "elm": "0.18.0",
-    "express": "4.17.2",
+    "elm": "0.18.0-exp5",
+    "express": "4.17.3",
     "opn-cli": "3.1.0",
     "ws": "3.3.3"
   },
   "devDependencies": {
     "elm-live": "2.7.5",
-    "mocha": "3.5.3"
+    "mocha": "9.2.2",
+    "prettier": "^2.6.2"
   }
 }
