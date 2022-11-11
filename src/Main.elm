@@ -1,14 +1,34 @@
-module Main exposing (..)
+port module Main exposing (..)
 
+import Browser
 import Grid exposing (renderGrid)
-import Html
 import Json.Decode exposing (decodeString)
 import Model exposing (..)
+import Server exposing (decodeGameState, encodeServerRequest, initBoard)
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( Model [] Nothing (Select 0 0) "" "" "", initBoard )
+port incomingMessage : (String -> msg) -> Sub msg
+
+
+port outgoingMessage : String -> Cmd msg
+
+
+init : () -> ( Model, Cmd Msg )
+init flags =
+    ( { pawnsList = []
+      , selectedPawn = Nothing
+      , state = Select 0 0
+      , currentPlayer = ""
+      , playerColor = ""
+      , winner = ""
+      }
+    , initBoard
+    )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    incomingMessage NextTurn
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -20,7 +40,7 @@ update msg model =
         Move coordsX coordsY ->
             case model.selectedPawn of
                 Just pawn ->
-                    ( Model model.pawnsList Nothing (Select coordsX coordsY) model.currentPlayer model.playerColor "", WebSocket.send serverUrl (encodeServerRequest (ServerRequest pawn coordsX coordsY)) )
+                    ( Model model.pawnsList Nothing (Select coordsX coordsY) model.currentPlayer model.playerColor "", outgoingMessage (encodeServerRequest (ServerRequest pawn coordsX coordsY)) )
 
                 Nothing ->
                     ( model, Cmd.none )
@@ -43,10 +63,11 @@ update msg model =
             ( model, Cmd.none )
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Html.program
+    Browser.element
         { init = init
         , view = renderGrid
+        , subscriptions = subscriptions
         , update = update
         }

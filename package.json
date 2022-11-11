@@ -2,26 +2,32 @@
   "name": "FunChess",
   "author": "Arnaud Flaesch",
   "version": "1.0.0",
-  "description": "Jeu d'échecs fonctionnel.",
+  "description": "Jeu d'échecs en programmation fonctionnelle.",
   "homepage": "http://arnaudflaesch.github.io/FunChess",
   "private": true,
   "scripts": {
-    "start": "elm make src/Main.elm",
+    "start": "elm-live src/Main.elm -- --output=\"app.js\"",
+    "start:backend": "node server.js",
     "build": "npm run start -- --output=dist/index.html",
     "dev": "elm-live src/Main.elm --open",
     "test": "elm-test",
     "format": "elm-format src/ tests/ review/",
     "lint": "npx elm-review",
-    "lint:fix": "npm run lin -- --fix"
+    "lint:fix": "npm run lin -- --fix",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
-    "elm": "^0.19.1-5"
+    "elm": "^0.19.1-5",
+    "express": "4.17.3",
+    "opn-cli": "3.1.0",
+    "ws": "3.3.3"
   },
   "devDependencies": {
     "elm-format": "0.8.5",
     "elm-live": "4.0.2",
     "elm-review": "2.6.1",
     "elm-test": "0.19.1-revision7",
-    "gh-pages": "3.2.3"
+    "gh-pages": "3.2.3",
+    "prettier": "2.7.1"
   }
 }

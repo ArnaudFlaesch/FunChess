@@ -1,6 +1,7 @@
 {
     "version": "1.0.0",
-    "summary": "Jeu d'échecs fonctionnel",
+    "summary": "Jeu d'échecs en programmation fonctionnelle",
+    "description": "Jeu d'échecs en programmation fonctionnelle",
     "repository": "https://github.com/ArnaudFlaesch/FunChess",
     "source-directories": [
         "."
